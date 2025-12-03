@@ -73,6 +73,8 @@ async def stream_specific_audio(filename: str):
 @app.get("/files", dependencies=[Depends(get_current_username)])
 async def list_files():
     files = get_all_files()
+    # Only keep the latest 2 files
+    files = files[:2]
     file_list = []
     for f in files:
         stats = os.stat(f)
